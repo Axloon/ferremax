@@ -22,8 +22,12 @@
         <a href="{% url 'contact' %}">Contacto</a>
     </nav>
 
-    {% block contenido %} 
+    {% block content %} 
     
+    {% endblock %}
+
+    {% block js %}
+    <script src="contador.js"></script>
     {% endblock %}
     
 </body>

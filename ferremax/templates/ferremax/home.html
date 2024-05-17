@@ -14,10 +14,6 @@
   <img src="{% static 'ferremax/img/Inicio-removebg-preview.png' %}" alt="Imagen" class="centered-image">
 </div>
 
-<div class="container">
-  <img src="{% static 'ferremax/img/Inicio-removebg-preview (1).png' %}" alt="Imagen" class="centered-image">
-</div>
-
 <div id="carouselExampleIndicators" class="carousel slide">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -29,10 +25,10 @@
       <img src="{% static 'ferremax/img/ferreteria.png' %}" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="ferreteria.jpg" class="d-block w-100" alt="...">
+      <img src="{% static 'ferremax/img/ferreteria.jpg' %}" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="ferreteria.png" class="d-block w-100" alt="...">
+      <img src="{% static 'ferremax/img/ferreteria.png' %}" class="d-block w-100" alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -45,10 +41,36 @@
   </button>
 </div>
 
+<div class="container">
+  <img src="{% static 'ferremax/img/Inicio-removebg-preview (1).png' %}" alt="Imagen" class="centered-image">
+  <div class="countdown-container">
+    <div class="countdown">
+      <h1>Cuenta Regresiva</h1>
+      <div id="timer">
+        <div>
+          <span id="days">00</span>
+          <div class="smalltext">Días</div>
+        </div>
+        <div>
+          <span id="hours">00</span>
+          <div class="smalltext">Horas</div>
+        </div>
+        <div>
+          <span id="minutes">00</span>
+          <div class="smalltext">Minutos</div>
+        </div>
+        <div>
+          <span id="seconds">00</span>
+          <div class="smalltext">Segundos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="container">
   <div class="card" style="width: 18rem;" onclick="window.location.href='pagina1.html'">
-    <img src="Cintamedir.jpg" class="card-img-top" alt="...">
+    <img src="{% static 'ferremax/img/Cintamedir.jpg' %}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">Cinta de medir</h5>
       <p class="card-text">Descripción del Producto 1</p>
@@ -56,7 +78,7 @@
     </div>
   </div>
   <div class="card" style="width: 18rem;" onclick="window.location.href='pagina1.html'">
-    <img src="Torni.jpg" class="card-img-top" alt="...">
+    <img src="{% static 'ferremax/img/Torni.jpg' %}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">Tornillos</h5>
       <p class="card-text">Descripción del Producto 1</p>
@@ -64,17 +86,19 @@
     </div>
   </div>
   <div class="card" style="width: 18rem;" onclick="window.location.href='pagina1.html'">
-    <img src="Martillo.jpg" class="card-img-top" alt="...">
+    <img src="{% static 'ferremax/img/Martillo.jpg' %}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">Martillos</h5>
       <p class="card-text">Descripción del Producto 1</p>
       <a href="#" class="btn btn-primary">Agregar al carrito</a>
     </div>
   </div>
-  <img src="Inicio__1_-removebg-preview (1).png" alt="Imagen" class="centered-image">
+
+  <img src="{% static 'ferremax/img/Inicio__1_-removebg-preview (1).png' %}" alt="Imagen" class="centered-image">
+
   <div class="container">
     <div class="card" style="width: 18rem;" onclick="window.location.href='pagina1.html'">
-      <img src="Casco.jpg" class="card-img-top" alt="...">
+      <img src="{% static 'ferremax/img/Casco.jpg' %}" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">Cascos</h5>
         <p class="card-text">Descripción del Producto 1</p>
@@ -82,7 +106,7 @@
       </div>
     </div>
       <div class="card" style="width: 18rem;" onclick="window.location.href='pagina1.html'">
-        <img src="Barnices.jpg" class="card-img-top" alt="...">
+        <img src="{% static 'ferremax/img/Barnices.jpg' %}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Barnices</h5>
           <p class="card-text">Descripción del Producto 1</p>
@@ -90,7 +114,7 @@
         </div>
       </div>
         <div class="card" style="width: 18rem;" onclick="window.location.href='pagina1.html'">
-          <img src="Taladro.jpg" class="card-img-top" alt="...">
+          <img src="{% static 'ferremax/img/Taladro.jpg' %}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Taladros </h5>
             <p class="card-text">Descripción del Producto 1</p>
