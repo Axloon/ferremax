@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ferremax',
     'django.contrib.humanize',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
