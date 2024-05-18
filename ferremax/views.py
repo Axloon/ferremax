@@ -8,6 +8,16 @@ from .serializer import ProductoSerializer
 class ProductoViewset(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
+    
+    def get_queryset(self):
+        productos = Producto.objects.all()
+        
+        nombre = self.request.GET.get('nombre')
+        
+        if nombre:
+            productos = productos.filter(nombre__contains=nombre)
+            
+        return productos
 
 
 
