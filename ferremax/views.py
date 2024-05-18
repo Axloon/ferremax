@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Producto
 
 # Create your views here.
 
@@ -9,4 +10,8 @@ def contact(request):
     return render(request, 'ferremax/contact.html')
 
 def shop(request):
-    return render(request, 'ferremax/shop.html')
+    productos = Producto.objects.all()
+    data = {
+        'productos': productos
+    }
+    return render(request, 'ferremax/shop.html', data)
