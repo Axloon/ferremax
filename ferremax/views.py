@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Producto
 from rest_framework import viewsets
 from .serializer import ProductoSerializer
@@ -19,8 +19,6 @@ class ProductoViewset(viewsets.ModelViewSet):
             
         return productos
 
-
-
 def home(request):
     return render(request, 'ferremax/home.html')
 
@@ -33,3 +31,25 @@ def shop(request):
         'productos': productos
     }
     return render(request, 'ferremax/shop.html', data)
+
+def add_to_cart(request, producto_id):
+    producto = Producto.objects.get(id=producto_id)
+    cart = request.session.get('cart', {})
+
+    if producto_id in cart:
+        cart[producto_id]['quantity'] += 1
+    else:
+        cart[producto_id] = {
+            'name': producto.nombre,
+            'price': producto.precio,
+            'quantity': 1,
+            'image': producto.imagen.url if producto.imagen else ''
+        }
+
+    request.session['cart'] = cart
+    return redirect('shop')
+
+def cart_view(request):
+    cart = request.session.get('cart', {})
+    total = sum(item['price'] * item['quantity'] for item in cart.values())
+    return render(request, 'ferremax/cart.html', {'cart': cart, 'total': total})

@@ -1,6 +1,7 @@
 {% extends 'ferremax/base.html' %}
 
 {% load static %}
+{% load humanize %}
 
 {% block css %}
 {% endblock %}
@@ -9,9 +10,6 @@
 {% endblock %}
 
 {% block content %}
-
-{% load humanize %}
-
 <div class="container">
   {% for p in productos %}
     <div class="card" style="width: 18rem;">
@@ -23,8 +21,9 @@
         <h2 class="card-title">{{ p.nombre | title }}</h2>
         <h3 class="card-title">{{ p.precio | intcomma }}</h3>
         <p class="card-text">{{ p.descripcion }}</p>
-        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+        <a href="{% url 'add_to_cart' p.id %}" class="btn btn-primary">Agregar al carrito</a>
       </div>
     </div>
-    {% endfor %}
+  {% endfor %}
+</div>
 {% endblock %}
