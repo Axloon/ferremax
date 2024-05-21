@@ -1,10 +1,17 @@
-{% extends 'ferremax/base.html' %}
-
-{% block content %}
-<div class="container">
-  <h1>Pago Exitoso</h1>
-  <p>Tu pago ha sido procesado correctamente.</p>
-  <p>Orden ID: {{ response.buy_order }}</p>
-  <p>Monto: ${{ response.amount }}</p>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago Exitoso</title>
+    <!-- Agrega aquí tus estilos CSS si los tienes -->
+</head>
+<body>
+    <div class="container">
+        <h1>Pago Exitoso</h1>
+        <p>Su pago ha sido procesado exitosamente.</p>
+        <!-- Puedes mostrar más detalles del pago aquí si lo deseas -->
+        <a href="{% url 'shop' %}" class="btn btn-primary">Volver a la Tienda</a>
+    </div>
+</body>
+</html>

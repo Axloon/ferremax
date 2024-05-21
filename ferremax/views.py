@@ -110,18 +110,8 @@ def init_payment(request):
     request.session['transaction_token'] = response['token']
     return redirect(response['url'] + '?token_ws=' + response['token'])
 
-
 def payment_success(request):
-    token = request.GET.get('token_ws')
-    transaction = Transaction(WebpayOptions(
-        commerce_code=settings.TRANSBANK['COMMERCE_CODE'],
-        api_key=settings.TRANSBANK['API_KEY'],
-        integration_type=IntegrationType.TEST  # Cambiar a IntegrationType.LIVE en producción
-    ))
-    response = transaction.commit(token=token)
-    if response['status'] == 'AUTHORIZED':
-        # Aquí puedes procesar la orden como pagada
-        request.session['cart'] = {}  # Vaciar el carrito después de la compra exitosa
-        return render(request, 'payment_success.html', {'response': response})
-    else:
-        return render(request, 'payment_failed.html', {'response': response})
+    return render(request, 'ferremax/payment_success.html')
+
+def payment_failed(request):
+    return render(request, 'ferremax/payment_failed.html')
