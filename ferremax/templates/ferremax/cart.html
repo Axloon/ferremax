@@ -2,25 +2,38 @@
 
 {% load humanize %}
 
+{% block css %}
+
+{% endblock %}
+
 {% block content %}
 <div class="container">
   <h1>Carrito de Compras</h1>
   {% if cart %}
-    <ul class="list-group">
+    <ul>
       {% for key, item in cart.items %}
-        <li class="list-group-item d-flex justify-content-between align-items-center">
+      <li class="cart-item">
+        <div class="cart-item-info">
+          <img src="{{ item.image }}" alt="{{ item.name }}">
           <div>
-            <img src="{{ item.image }}" alt="{{ item.name }}" style="width: 50px;">
-            {{ item.name }} (x{{ item.quantity }})
+            <span class="cart-item-name">{{ item.name }}</span> (x{{ item.quantity }})
           </div>
-          <span>${{ item.price | intcomma }}</span>
-        </li>
+          <span class="cart-item-price">${{ item.price | intcomma }}</span>
+        </div>
+        <div>
+          <a href="{% url 'increase_quantity' key %}" class="btn btn-primary btn-sm">+</a>
+          <a href="{% url 'decrease_quantity' key %}" class="btn btn-danger btn-sm">-</a>
+          <a href="{% url 'remove_from_cart' key %}" class="btn btn-warning btn-sm">Eliminar</a>
+        </div>
+      </li>
       {% endfor %}
     </ul>
-    <h3>Total: ${{ total | intcomma }}</h3>
+    <div class="cart-total">Total: ${{ total | intcomma }}</div>
+    <a href="{% url 'init_payment' %}" class="btn btn-primary">Pagar</a>
   {% else %}
     <p>Tu carrito está vacío</p>
   {% endif %}
 </div>
 {% endblock %}
+
 

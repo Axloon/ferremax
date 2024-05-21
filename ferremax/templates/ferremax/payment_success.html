@@ -1,0 +1,10 @@
+{% extends 'ferremax/base.html' %}
+
+{% block content %}
+<div class="container">
+  <h1>Pago Exitoso</h1>
+  <p>Tu pago ha sido procesado correctamente.</p>
+  <p>Orden ID: {{ response.buy_order }}</p>
+  <p>Monto: ${{ response.amount }}</p>
+</div>
+{% endblock %}
