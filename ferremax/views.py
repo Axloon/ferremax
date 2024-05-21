@@ -3,6 +3,7 @@ from .models import Producto
 from rest_framework import viewsets
 from .serializer import ProductoSerializer
 
+
 # Create your views here.
 
 class ProductoViewset(viewsets.ModelViewSet):
@@ -53,3 +54,6 @@ def cart_view(request):
     cart = request.session.get('cart', {})
     total = sum(item['price'] * item['quantity'] for item in cart.values())
     return render(request, 'ferremax/cart.html', {'cart': cart, 'total': total})
+
+def conversor(request):
+    return render(request, 'ferremax/conversor.html')
