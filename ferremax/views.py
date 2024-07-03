@@ -5,6 +5,8 @@ from .serializer import ProductoSerializer
 from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
 from transbank.common.integration_type import IntegrationType
 from django.conf import settings
+from .forms import ConversionForm
+from .utils import clp_to_usd_conversion, usd_to_clp_conversion
 
 # Crear tu vista aquí
 
@@ -26,6 +28,34 @@ class ProductoViewSet(viewsets.ModelViewSet):
 def home(request):
     return render(request, 'ferremax/home.html')
 
+def home_vendedor(request):
+    return render(request, 'ferremax/vendedor/home_vendedor.html')
+
+def home_bodeguero(request):
+    return render(request, 'ferremax/bodeguero/home_bodeguero.html')
+
+def home_contador(request):
+    return render(request, 'ferremax/contador/home_contador.html')
+
+def currency_converter(request):
+    result = None
+    if request.method == 'POST':
+        form = ConversionForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+            direction = form.cleaned_data['direction']
+            if direction == 'CLP to USD':
+                result = clp_to_usd_conversion(amount)
+                result = f'{amount} CLP son {result:.2f} USD' if result else 'Error en la conversión'
+            else:
+                result = usd_to_clp_conversion(amount)
+                result = f'{amount} USD son {result} CLP' if result else 'Error en la conversión'
+    else:
+        form = ConversionForm()
+    return render(request, 'ferremax/currency_converter.html', {'form': form, 'result': result})
+
+def conversor(request):
+    return render(request, 'ferremax/conversor.html')
 
 def contact(request):
     return render(request, 'ferremax/contact.html')
@@ -115,3 +145,13 @@ def payment_success(request):
 
 def payment_failed(request):
     return render(request, 'ferremax/payment_failed.html')
+
+def productos_vendedor(request):
+    productos = Producto.objects.all()
+    data = {
+        'productos': productos
+    }
+    return render(request, 'ferremax/vendedor/productos_vendedor.html', data)
+
+def ordenes_vendedor(request):
+    return render(request, 'ferremax/vendedor/ordenes_vendedor.html')

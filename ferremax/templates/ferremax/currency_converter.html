@@ -1,0 +1,29 @@
+{% extends 'ferremax/base.html' %}
+
+{% load humanize %}
+
+{% block css %}
+
+
+{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversor de Divisas</title>
+</head>
+<body>
+    <h1>Conversor de Divisas</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}c1 
+        <button type="submit">Convertir</button>
+    </form>
+    {% if result %}
+        <p>{{ result }}</p>
+    {% endif %}
+</body>
+</html>
+{% endblock %}
