@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto
+from .models import Producto, Vendedor, Bodeguero
 from rest_framework import viewsets
-from .serializer import ProductoSerializer
+from .serializer import ProductoSerializer, VendedorSerializer, BodegueroSerializer
 from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
 from transbank.common.integration_type import IntegrationType
 from django.conf import settings
@@ -23,6 +23,34 @@ class ProductoViewSet(viewsets.ModelViewSet):
             productos = productos.filter(nombre__contains=nombre)
 
         return productos
+    
+class VendedorViewSet(viewsets.ModelViewSet):
+    queryset = Vendedor.objects.all()
+    serializer_class = VendedorSerializer
+
+    def get_queryset(self):
+        vendedor = Vendedor.objects.all()
+
+        nombre = self.request.GET.get('nombre')
+
+        if nombre:
+            vendedor = vendedor.filter(nombre__contains=nombre)
+
+        return vendedor
+    
+class BodegueroViewSet(viewsets.ModelViewSet):
+    queryset = Bodeguero.objects.all()
+    serializer_class = BodegueroSerializer
+
+    def get_queryset(self):
+        bodeguero = Bodeguero.objects.all()
+
+        nombre = self.request.GET.get('nombre')
+
+        if nombre:
+            bodeguero = bodeguero.filter(nombre__contains=nombre)
+
+        return bodeguero
 
 
 def home(request):

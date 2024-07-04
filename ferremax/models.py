@@ -18,3 +18,20 @@ class Producto(models.Model):
     
     def __str__(self):
         return self.nombre
+    
+class Vendedor(models.Model):
+    nombre = models.CharField(max_length=50)
+    cantidad = models.IntegerField()
+    aconfirmar = models.BooleanField()
+    descripcion = models.TextField()
+    
+    
+    def __str__(self):
+        return self.nombre
+    
+class Bodeguero(models.Model):
+    nombre = models.CharField(max_length=100)
+    aceptar = models.BooleanField()
+    
+    def __str__(self):
+        return self.nombre

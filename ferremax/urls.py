@@ -1,9 +1,11 @@
 from django.urls import path, include
-from .views import home, conversor, contact, shop, cart, add_to_cart, increase_quantity, decrease_quantity, remove_from_cart, init_payment, payment_success, ProductoViewSet, home_vendedor, home_bodeguero, home_contador, productos_vendedor, ordenes_vendedor
+from .views import home, conversor, contact, shop, cart, add_to_cart, increase_quantity, decrease_quantity, remove_from_cart, init_payment, payment_success, ProductoViewSet, VendedorViewSet, BodegueroViewSet, home_vendedor, home_bodeguero, home_contador, productos_vendedor, ordenes_vendedor
 from rest_framework import routers
 from . import views
 router = routers.DefaultRouter()
-router.register('producto', ProductoViewSet)
+router.register('producto', ProductoViewSet),
+router.register('vendedor', VendedorViewSet),
+router.register('bodeguero', BodegueroViewSet)
 
 urlpatterns = [
     path('', home, name="home"),
