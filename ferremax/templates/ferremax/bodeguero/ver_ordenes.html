@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ver Órdenes de Pedidos</title>
+</head>
+<body>
+    <h1>Órdenes de Pedidos</h1>
+    <ul>
+        {% for pedido in pedidos %}
+            <li>
+                {{ pedido.producto.nombre }} - Cantidad: {{ pedido.cantidad }}
+                <form method="post" action="{% url 'preparar_pedidos' pedido.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Preparar Pedido</button>
+                </form>
+                <form method="post" action="{% url 'entregar_pedidos' pedido.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Entregar Pedido</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

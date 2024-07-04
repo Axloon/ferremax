@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Organizar Despacho</title>
+</head>
+<body>
+    <h1>Organizar Despacho</h1>
+    <ul>
+        {% for pedido in pedidos %}
+            <li>
+                {{ pedido.producto.nombre }} - Cantidad: {{ pedido.cantidad }}
+                <!-- Aquí puedes agregar botones o enlaces para marcar el pedido como despachado -->
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -35,3 +35,20 @@ class Bodeguero(models.Model):
     
     def __str__(self):
         return self.nombre
+    
+class Pedido(models.Model):
+    ESTADOS = [
+        ('pendiente', 'Pendiente'),
+        ('aprobado', 'Aprobado'),
+        ('rechazado', 'Rechazado'),
+        ('en_preparacion', 'En Preparación'),
+        ('entregado', 'Entregado')
+    ]
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+    estado = models.CharField(max_length=20, choices=ESTADOS, default='pendiente')
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Pedido {self.id} - {self.producto.nombre}"

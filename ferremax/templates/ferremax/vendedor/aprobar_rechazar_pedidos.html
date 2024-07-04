@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aprobar o Rechazar Pedidos</title>
+</head>
+<body>
+    <h1>Aprobar o Rechazar Pedidos</h1>
+    <ul>
+        {% for pedido in pedidos %}
+            <li>
+                {{ pedido.producto.nombre }} - Cantidad: {{ pedido.cantidad }}
+                <form method="post" action="{% url 'aprobar_rechazar_pedidos' pedido.id %}">
+                    {% csrf_token %}
+                    <button type="submit" name="action" value="aprobar">Aprobar</button>
+                    <button type="submit" name="action" value="rechazar">Rechazar</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

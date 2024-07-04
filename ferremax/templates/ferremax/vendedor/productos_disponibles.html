@@ -1,0 +1,13 @@
+
+{% block content %}
+
+    <h1>Productos Disponibles</h1>
+    <ul>
+        {% for producto in productos %}
+            <li>{{ producto.nombre }} - {{ producto.descripcion }} - ${{ producto.precio }}</li>
+        {% endfor %}
+    </ul>
+
+
+
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto, Vendedor, Bodeguero
+from .models import Producto, Vendedor, Bodeguero, Pedido
 from rest_framework import viewsets
 from .serializer import ProductoSerializer, VendedorSerializer, BodegueroSerializer
 from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
@@ -7,6 +7,7 @@ from transbank.common.integration_type import IntegrationType
 from django.conf import settings
 from .forms import ConversionForm
 from .utils import clp_to_usd_conversion, usd_to_clp_conversion
+from django.views import View
 
 # Crear tu vista aquí
 
@@ -163,7 +164,7 @@ def init_payment(request):
         buy_order='12345678',  # Debe ser único por cada transacción
         session_id='your_session_id',
         amount=total,
-        return_url=request.build_absolute_uri('/payment_success/')
+        return_url=request.build_absolute_uri('/payment_succes/')
     )
     request.session['transaction_token'] = response['token']
     return redirect(response['url'] + '?token_ws=' + response['token'])
@@ -183,3 +184,47 @@ def productos_vendedor(request):
 
 def ordenes_vendedor(request):
     return render(request, 'ferremax/vendedor/ordenes_vendedor.html')
+
+class ProductosDisponiblesView(View):
+    def get(self, request):
+        productos = Producto.objects.filter(disponible=True)
+        return render(request, 'ferremax/vendedor/productos_disponibles.html', {'productos': productos})
+
+class AprobarRechazarPedidosView(View):
+    def get(self, request):
+        pedidos = Pedido.objects.filter(estado='pendiente')
+        return render(request, 'ferremax/vendedor/aprobar_rechazar_pedidos.html', {'pedidos': pedidos})
+
+    def post(self, request, pedido_id):
+        action = request.POST.get('action')
+        pedido = get_object_or_404(Pedido, id=pedido_id)
+        if action == 'aprobar':
+            pedido.estado = 'aprobado'
+        elif action == 'rechazar':
+            pedido.estado = 'rechazado'
+        pedido.save()
+        return redirect('ferremax/vendedor/aprobar_rechazar_pedidos.html')
+
+class OrganizarDespachoView(View):
+    def get(self, request):
+        pedidos = Pedido.objects.filter(estado='aprobado')
+        return render(request, 'ferremax/vendedor/organizar_despacho.html', {'pedidos': pedidos})
+    
+class VerOrdenesView(View):
+    def get(self, request):
+        pedidos = Pedido.objects.filter(estado='aprobado')
+        return render(request, 'ferremax/bodeguero/ver_ordenes.html', {'pedidos': pedidos})
+
+class PrepararPedidosView(View):
+    def post(self, request, pedido_id):
+        pedido = get_object_or_404(Pedido, id=pedido_id)
+        pedido.estado = 'en_preparacion'
+        pedido.save()
+        return redirect('ver_ordenes')
+
+class EntregarPedidosView(View):
+    def post(self, request, pedido_id):
+        pedido = get_object_or_404(Pedido, id=pedido_id)
+        pedido.estado = 'entregado'
+        pedido.save()
+        return redirect('ver_ordenes')
