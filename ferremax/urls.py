@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import home, conversor, contact, shop, cart, add_to_cart, increase_quantity, decrease_quantity, remove_from_cart, init_payment, payment_success, payment_failed, ProductoViewSet, VendedorViewSet, BodegueroViewSet, home_vendedor, home_bodeguero, home_contador, productos_vendedor, ordenes_vendedor, ProductosDisponiblesView, AprobarRechazarPedidosView, OrganizarDespachoView, VerOrdenesView, PrepararPedidosView, EntregarPedidosView
+from .views import home, registro, conversor, contact, shop, cart, add_to_cart, increase_quantity, decrease_quantity, remove_from_cart, init_payment, payment_success, payment_failed, ProductoViewSet, VendedorViewSet, BodegueroViewSet, home_vendedor, home_bodeguero, home_contador, productos_vendedor, ordenes_vendedor, ProductosDisponiblesView, AprobarRechazarPedidosView, OrganizarDespachoView, VerOrdenesView, PrepararPedidosView, EntregarPedidosView
 from rest_framework import routers
 from . import views
 router = routers.DefaultRouter()
@@ -10,6 +10,7 @@ router.register('bodeguero', BodegueroViewSet),
 
 urlpatterns = [
     path('', home, name="home"),
+    path('registro/', registro, name="registro"),
     path('ferremax/vendedor', home_vendedor, name="home_vendedor"),
     path('ferremax/bodeguero', home_bodeguero, name="home_bodeguero"),
     path('ferremax/contador', home_contador, name="home_contador"),

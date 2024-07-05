@@ -25,6 +25,13 @@
         <a href="{% url 'contact' %}">Contacto</a>
         <a href="{% url 'cart' %}">Carrito de compras</a>
         <a href="{% url 'currency_converter' %}">Conversor de Divisas</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="user">Cerrar sesión</a>
+        <a href="#">{{ user.username }}</a>
+        {% else %}
+        <a href="{% url 'login' %}" class="user">Iniciar sesión</a>
+        <a href="{% url 'registro' %}" class="user">Registrate</a>
+        {% endif %}
     </nav>
     
 

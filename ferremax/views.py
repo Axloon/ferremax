@@ -5,11 +5,28 @@ from .serializer import ProductoSerializer, VendedorSerializer, BodegueroSeriali
 from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
 from transbank.common.integration_type import IntegrationType
 from django.conf import settings
-from .forms import ConversionForm
+from .forms import CustomUserCreationForm, ConversionForm
 from .utils import clp_to_usd_conversion, usd_to_clp_conversion
 from django.views import View
+from django.contrib.auth import authenticate, login
 
 # Crear tu vista aquí
+
+def registro(request):
+    data = {
+        'form': CustomUserCreationForm()
+    }
+    
+    if request.method == 'POST':
+        formulario = CustomUserCreationForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+            login(request, user)
+            return redirect(to="home")
+        data["form"] = formulario
+    
+    return render(request, 'registration/registro.html', data)
 
 class ProductoViewSet(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
