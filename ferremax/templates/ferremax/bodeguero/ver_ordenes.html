@@ -1,9 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Ver Órdenes de Pedidos</title>
-</head>
-<body>
+{% extends 'ferremax/base.html' %}
+
+{% load static %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+{% endblock %}
+
+{% block content %}
+
     <h1>Órdenes de Pedidos</h1>
     <ul>
         {% for pedido in pedidos %}
@@ -20,5 +26,5 @@
             </li>
         {% endfor %}
     </ul>
-</body>
-</html>
+
+{% endblock %}

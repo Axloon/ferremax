@@ -4,6 +4,125 @@
 {% load humanize %}
 
 {% block css %}
+
+<style>
+  body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: aliceblue;
+  }
+
+  nav {
+      background-color: black;
+      padding: 10px;
+      display: flex;
+  }
+
+  nav a {
+      color: white;
+      text-decoration: none;
+      padding: 14px 16px;
+      display: inline-block;
+      transition: transform 0.3s ease-in-out;
+  }
+
+  nav a:hover {
+      transform: scale(1.2);
+      color: white; /* Cambia el color del texto al pasar el ratón */
+  }
+
+  .logo img {
+      height: 40px; /* Ajusta la altura según el tamaño de tu logo */
+      width: auto; /* Para mantener la proporción del logo */
+      display: block;
+      transition: transform 0.3s ease-in-out; /* Agrega una transición a la propiedad transform */
+  }
+
+  .logo img:hover {
+      transform: rotate(360deg); /* Realiza una rotación de 360 grados al pasar el ratón sobre el logo */
+  }
+
+  #carouselExampleIndicators {
+      max-width: 1050px; /* Ajusta el ancho del carrusel según sea necesario */
+      margin: 20px auto; /* Centra el carrusel en la página */
+      margin-top: -30px;
+  }
+
+  /* Estilo para las imágenes dentro de las diapositivas */
+  .carousel-inner img {
+      width: 100%; /* Hace que las imágenes ocupen el 100% del ancho de la diapositiva */
+      height: auto; /* Mantiene la proporción de aspecto de las imágenes */
+      border-radius: 8px; /* Agrega bordes redondeados a las imágenes */
+  }
+
+  .container {
+      text-align: center;
+      padding: 20px;
+  }
+
+  .centered-image {
+      max-width: 50%; /* Define el ancho máximo de la imagen */
+      display: block; /* Centra la imagen horizontalmente */
+      margin: 0 auto; /* Centra la imagen horizontalmente */
+  }
+
+  .container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+  }
+
+  .card {
+      margin: 10px;
+      background: #fff;
+      box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+      cursor: default;
+  }
+
+  .card:hover {
+      box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
+      transform: translateY(-3%);
+  }
+
+  .container {
+      display: flex;
+      align-items: center;
+  }
+
+  .centered-image {
+      margin-right: 20px; /* Espacio entre la imagen y la cuenta regresiva */
+  }
+
+  .countdown-container {
+      flex-grow: 1; /* Permite que la cuenta regresiva ocupe todo el espacio restante */
+  }
+
+  #timer {
+      display: flex;
+      justify-content: center;
+  }
+
+  #timer > div {
+      margin: 0 10px;
+  }
+
+  #timer span {
+      font-size: 48px;
+      color: #333;
+  }
+
+  .smalltext {
+      font-size: 12px;
+      color: #555;
+  }
+
+  .centered-image {
+      max-width: 50%;
+      display: block;
+      margin: 0 auto;
+  }
+</style>
+
 {% endblock %}
 
 {% block js %}
