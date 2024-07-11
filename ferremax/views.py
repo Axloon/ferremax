@@ -181,13 +181,25 @@ def init_payment(request):
         buy_order='12345678',  # Debe ser único por cada transacción
         session_id='your_session_id',
         amount=total,
-        return_url=request.build_absolute_uri('/payment_succes/')
+        return_url=request.build_absolute_uri('/payment_success/')
     )
     request.session['transaction_token'] = response['token']
     return redirect(response['url'] + '?token_ws=' + response['token'])
 
 def payment_success(request):
-    return render(request, 'ferremax/payment_success.html')
+    # Obtener el carrito de compras desde la sesión
+    cart = request.session.get('cart', {})
+    
+    # Calcular el total de la compra
+    total = sum(item['price'] * item['quantity'] for item in cart.values())
+    
+    # Aquí podrías guardar el pedido en la base de datos, pero eso depende de tu lógica
+    # por ahora, simplemente limpia el carrito.
+    request.session['cart'] = {}
+
+    # Renderizar la plantilla con los detalles de la compra y el total
+    return render(request, 'ferremax/payment_success.html', {'cart': cart, 'total': total})
+
 
 def payment_failed(request):
     return render(request, 'ferremax/payment_failed.html')

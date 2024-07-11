@@ -1,17 +1,40 @@
+{% load humanize %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pago Exitoso</title>
-    <!-- Agrega aquí tus estilos CSS si los tienes -->
 </head>
 <body>
     <div class="container">
+        <svg class="success-icon" viewBox="0 0 52 52">
+            <circle class="success-circle" cx="26" cy="26" r="25"/>
+            <path class="success-check" d="M14 27l10 10 14-14"/>
+        </svg>
         <h1>Pago Exitoso</h1>
-        <p>Su pago ha sido procesado exitosamente.</p>
-        <!-- Puedes mostrar más detalles del pago aquí si lo deseas -->
+        <p>Su pago se ha procesado correctamente.</p>
+        
+        <h2>Detalle de la compra:</h2>
+        <ul>
+            {% for key, item in cart.items %}
+            <li>
+                <div>
+                    <span>{{ item.name }}</span> (x{{ item.quantity }})
+                </div>
+                <div>
+                    <span>Precio unitario: ${{ item.price | intcomma }}</span>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        
+        <div class="cart-total">Total: ${{ total | intcomma }}</div>
         <a href="{% url 'shop' %}" class="btn btn-primary">Volver a la Tienda</a>
     </div>
+    <style>
+        /* Estilos CSS aquí */
+    </style>
 </body>
 </html>
